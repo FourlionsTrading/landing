@@ -1,0 +1,980 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fourlions Trading Private Limited</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <style>
+        :root {
+            --primary: #1a3a5f;
+            --secondary: #d4af37;
+            --accent: #2c5f2d;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --text: #333333;
+            --gray: #6c757d;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            line-height: 1.6;
+            color: var(--text);
+            background-color: #fefefe;
+            overflow-x: hidden;
+        }
+        
+        /* Header Styles */
+        .top-header {
+            background-color: var(--primary);
+            color: white;
+            padding: 8px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.9rem;
+        }
+        
+        .header-left {
+            display: flex;
+            gap: 20px;
+        }
+        
+        .header-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .header-right {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .social-icon {
+            color: white;
+            transition: color 0.3s;
+        }
+        
+        .social-icon:hover {
+            color: var(--secondary);
+        }
+        
+        /* Navigation */
+        nav {
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 5%;
+        }
+        
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+        
+        .logo span {
+            color: var(--secondary);
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 25px;
+        }
+        
+        .nav-links a {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 500;
+            transition: color 0.3s;
+            position: relative;
+        }
+        
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+        
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            background: var(--secondary);
+            left: 0;
+            bottom: -5px;
+            transition: width 0.3s;
+        }
+        
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+        
+        .burger {
+            display: none;
+            cursor: pointer;
+            position: relative;
+            width: 30px;
+            height: 30px;
+            z-index: 1001;
+        }
+
+        .burger div {
+            width: 25px;
+            height: 3px;
+            background-color: var(--secondary);
+            margin: 5px;
+            transition: all 0.3s ease-in-out; 
+            transform-origin: center; 
+        }
+
+        /* Animate burger to cross */
+        .burger.active .line1 {
+            transform: translateY(8px) rotate(45deg); 
+        }
+
+        .burger.active .line2 {
+            opacity: 0; 
+        }
+
+        .burger.active .line3 {
+            transform: translateY(-8px) rotate(-45deg); 
+        }
+        
+        /* Hero Section */
+        .hero {
+            height: 90vh;
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), 
+                        url('https://uploads.onecompiler.io/43xeqf88r/43xf9jquk/IMG_20250922_212311.png') no-repeat center center/cover;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            padding: 0 5%;
+        }
+        
+        .hero-content h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+        
+        .hero-content p {
+            font-size: 1.3rem;
+            margin-bottom: 30px;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: var(--secondary);
+            color: white;
+            padding: 12px 30px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+        }
+        
+        .btn:hover {
+            background-color: #b8941f;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        /* Section Styles */
+        .section {
+            padding: 80px 5%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .section h2 {
+            font-size: 2.5rem;
+            color: var(--primary);
+            text-align: center;
+            margin-bottom: 50px;
+            position: relative;
+        }
+        
+        .section h2::after {
+            content: '';
+            position: absolute;
+            width: 80px;
+            height: 4px;
+            background-color: var(--secondary);
+            left: 50%;
+            bottom: -15px;
+            transform: translateX(-50%);
+            border-radius: 2px;
+        }
+        
+        .section p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin-bottom: 20px;
+            text-align: center;
+            max-width: 900px;
+            margin-left: auto;
+            margin-right: auto;
+            color: var(--gray);
+        }
+        
+        /* Vision & Mission Cards */
+        .statement-cards {
+            display: flex;
+            gap: 30px;
+            margin-top: 50px;
+        }
+        
+        .statement-card {
+            flex: 1;
+            background: white;
+            padding: 40px 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+            text-align: center;
+            transition: transform 0.3s;
+        }
+        
+        .statement-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .statement-card i {
+            font-size: 3rem;
+            color: var(--secondary);
+            margin-bottom: 20px;
+        }
+        
+        .statement-card h3 {
+            font-size: 1.8rem;
+            color: var(--primary);
+            margin-bottom: 20px;
+        }
+        
+        /* Activities Grid */
+        .activity-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+        
+        .activity-item {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s;
+        }
+        
+        .activity-item:hover {
+            transform: translateY(-10px);
+        }
+        
+        .activity-image {
+            height: 200px;
+            overflow: hidden;
+        }
+        
+        .activity-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+        
+        .activity-item:hover .activity-image img {
+            transform: scale(1.1);
+        }
+        
+        .activity-content {
+            padding: 25px;
+        }
+        
+        .activity-content h3 {
+            font-size: 1.5rem;
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+        
+        /* Features Table */
+        .features-table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0 15px;
+            margin-top: 40px;
+        }
+        
+        .features-table td {
+            padding: 20px;
+            vertical-align: top;
+        }
+        
+        .features-table td:first-child {
+            font-weight: bold;
+            width: 30%;
+            color: var(--primary);
+            border-right: 3px solid var(--secondary);
+            background-color: rgba(212, 175, 55, 0.1);
+            border-radius: 8px 0 0 8px;
+        }
+        
+        .features-table td:last-child {
+            background-color: rgba(248, 249, 250, 0.8);
+            border-radius: 0 8px 8px 0;
+        }
+        
+        /* Leadership */
+        .leadership-content {
+            display: flex;
+            align-items: center;
+            gap: 40px;
+            margin-top: 50px;
+            background: white;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+        }
+        
+        .leader-image {
+            flex-shrink: 0;
+            width: 250px;
+            height: 250px;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 5px solid var(--secondary);
+        }
+        
+        .leader-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .leader-info h3 {
+            font-size: 2rem;
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+        
+        .leader-info p {
+            text-align: left;
+            margin-bottom: 15px;
+        }
+        
+        /* Values Grid */
+        .values-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+        
+        .value-item {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s;
+        }
+        
+        .value-item:hover {
+            transform: translateY(-10px);
+        }
+        
+        .value-item i {
+            font-size: 2.5rem;
+            color: var(--secondary);
+            margin-bottom: 20px;
+        }
+        
+        .value-item h3 {
+            font-size: 1.5rem;
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+        
+        /* Contact Section */
+        .contact-container {
+            display: flex;
+            gap: 40px;
+            margin-top: 50px;
+        }
+        
+        .contact-info {
+            flex: 1;
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+        }
+        
+        .contact-info p {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+            text-align: left;
+        }
+        
+        .contact-info i {
+            color: var(--secondary);
+            margin-right: 15px;
+            font-size: 1.2rem;
+            width: 20px;
+        }
+        
+        .contact-form-container {
+            flex: 1;
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+        }
+        
+        .contact-form-container h3 {
+            font-size: 1.8rem;
+            color: var(--primary);
+            margin-bottom: 25px;
+            text-align: center;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: var(--dark);
+        }
+        
+        .form-group input, 
+        .form-group textarea {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+            transition: border 0.3s;
+        }
+        
+        .form-group input:focus, 
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+        
+        .form-group textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+        
+        .message {
+            padding: 12px;
+            border-radius: 5px;
+            margin-top: 15px;
+            text-align: center;
+            display: none;
+        }
+        
+        .success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        
+        .error {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+        
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255,255,255,.3);
+            border-radius: 50%;
+            border-top-color: #fff;
+            animation: spin 1s ease-in-out infinite;
+            margin-right: 10px;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--dark);
+            color: white;
+            text-align: center;
+            padding: 30px 5%;
+            margin-top: 50px;
+        }
+        
+        /* Responsive Design */
+        @media screen and (max-width: 1024px) {
+            .statement-cards, .contact-container {
+                flex-direction: column;
+            }
+            
+            .leadership-content {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .leader-info p {
+                text-align: center;
+            }
+        }
+        
+        @media screen and (max-width: 768px) {
+            .nav-links {
+                position: fixed;
+                right: 0;
+                height: calc(100vh - 105px); 
+                top: 105px; 
+                background-color: var(--primary);
+                flex-direction: column;
+                align-items: center;
+                justify-content: flex-start; 
+                padding-top: 30px; 
+                width: 70%;
+                transform: translateX(100%);
+                transition: transform 0.5s ease-in;
+                z-index: 1000;
+            }
+            
+            .nav-links li {
+                opacity: 0;
+                margin: 5px 0; 
+            }
+            
+            .nav-links a {
+                color: white;
+                font-size: 1.2rem;
+            }
+            
+            .burger {
+                display: block;
+            }
+            
+            .nav-active {
+                transform: translateX(0%);
+            }
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero-content p {
+                font-size: 1.1rem;
+            }
+            
+            .section h2 {
+                font-size: 2rem;
+            }
+            
+            .features-table td:first-child {
+                width: 40%;
+            }
+        }
+        /* Animation for nav links */
+        @keyframes navLinkFade {
+            from {
+                opacity: 0;
+                transform: translateX(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0px);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Top Header -->
+    <div class="top-header">
+        <div class="header-left">
+            <div class="header-item">
+                <i class="fas fa-map-marker-alt"></i>
+                <span>London, United Kingdom</span>
+            </div>
+            <div class="header-item">
+                <i class="fas fa-envelope"></i>
+                <span>info@fourlionstrading.com</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav>
+      <img src="https://uploads.onecompiler.io/43xeqf88r/43xf9jquk/WhatsApp%20Image%202025-10-22%20at%2010.24.02_4b01cbca.jpg" style="border-radius: 50%; width: 75px; height: 75px; border: 2px solid #FFC105;">
+        <div class="logo">Fourlions <span>Trading</span></div>
+        <ul class="nav-links">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#vision">Vision</a></li>
+            <li><a href="#mission">Mission</a></li>
+            <li><a href="#activities">Activities</a></li>
+            <li><a href="#features">Features</a></li>
+            <li><a href="#leadership">Leadership</a></li>
+            <li><a href="#values">Values</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+        <div class="burger">
+            <div class="line1"></div>
+            <div class="line2"></div>
+            <div class="line3"></div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <h1>Fourlions Trading Limited</h1>
+            <p>Your Premier Partner in Global Import-Export Excellence</p><p style="color:#FFC105">
+Delivering high-quality rice, spices, coconuts, textiles, and eco-friendly cutlery worldwide</p>
+            <a href="#activities" class="btn">Explore Our Products</a>
+        </div>
+    </section>
+
+    <!-- Vision Section -->
+    <section id="vision" class="section">
+        <h2>Vision Statement</h2>
+        <div class="statement-cards">
+            <div class="statement-card">
+                <i class="fas fa-eye"></i>
+                <h3>Our Vision</h3>
+                <p>"To be a globally recognised trading partner, trusted for delivering quality, sustainable, and diverse products, while fostering growth, innovation, and integrity across international markets."</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Mission Section -->
+    <section id="mission" class="section">
+        <h2>Mission Statement</h2>
+        <div class="statement-cards">
+            <div class="statement-card">
+                <i class="fas fa-bullseye"></i>
+                <h3>Our Mission</h3>
+                <p>"Our mission is to connect global markets by supplying premium rice, spices, coconuts, textiles, and eco-friendly cutleries. We are committed to ensuring uncompromising quality, sustainable sourcing, and efficient logistics, while building transparent, long-term relationships with wholesalers and distributors worldwide."</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Activities Section -->
+    <section id="activities" class="section">
+        <h2>Core Business Activities</h2>
+        <div class="activity-grid">
+            <div class="activity-item">
+                <div class="activity-image">
+                    <img src="https://images.unsplash.com/photo-1586201375761-83865001e31c?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" alt="Rice">
+                </div>
+                <div class="activity-content">
+                    <h3>Rice</h3>
+                    <p>Premium quality rice varieties sourced from trusted producers worldwide, ensuring superior taste and nutrition for global markets.</p>
+                </div>
+            </div>
+            <div class="activity-item">
+                <div class="activity-image">
+                    <img src="https://uploads.onecompiler.io/43xeqf88r/43xf9jquk/gemini-2.5-flash-image-preview_A_vividly_diverse_array_of_Indian_rice_and_millet_each_crop_displayed_in_its_own_ornate_bowl._The_g-0.jpg" alt="Spices">
+                </div>
+                <div class="activity-content">
+                    <h3>Spices</h3>
+                    <p>A wide range of authentic spices delivering rich flavours and freshness to international markets, carefully sourced and quality-checked.</p>
+                </div>
+            </div>
+            <div class="activity-item">
+                <div class="activity-image">
+                    <img src="https://uploads.onecompiler.io/43xeqf88r/43xf9jquk/Gemini_Generated_Image_mhsgbemhsgbemhsg.png" alt="Coconuts">
+                </div>
+                <div class="activity-content">
+                    <h3>Coconuts & Derivatives</h3>
+                    <p>High-quality coconuts and related products for both food and industrial purposes, sourced from premium suppliers.</p>
+                </div>
+            </div>
+            <div class="activity-item">
+                <div class="activity-image">
+                    <img src="https://uploads.onecompiler.io/43xeqf88r/43xf9jquk/envato-labs-ai-7f62856d-a33a-4051-a757-e5f03225f32e.jpg" alt="Textiles">
+                </div>
+                <div class="activity-content">
+                    <h3>Textiles</h3>
+                    <p>Durable and diverse fabrics meeting varied wholesale requirements across different markets and applications.</p>
+                </div>
+            </div>
+            <div class="activity-item">
+                <div class="activity-image">
+                    <img src="https://uploads.onecompiler.io/43xeqf88r/43xf9jquk/Gemini_Generated_Image_xkjyr0xkjyr0xkjy.png" alt="Eco-friendly Cutlery">
+                </div>
+                <div class="activity-content">
+                    <h3>Eco-friendly Cutlery</h3>
+                    <p>Sustainable, biodegradable wooden cutlery supporting global moves towards eco-friendly and plastic-free alternatives.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="section">
+        <h2>What Sets Us Apart</h2>
+        <table class="features-table">
+            <tr>
+                <td>Global Partnerships</td>
+                <td>Building strong, transparent relationships with wholesalers and distributors across multiple regions.</td>
+            </tr>
+            <tr>
+                <td>Rigorous Quality Control</td>
+                <td>Every product undergoes strict checks to comply with international standards and exceed customer expectations.</td>
+            </tr>
+            <tr>
+                <td>Comprehensive Product Portfolio</td>
+                <td>From staple food products to sustainable alternatives, we offer a complete solution for global wholesalers.</td>
+            </tr>
+            <tr>
+                <td>Efficient Logistics</td>
+                <td>Streamlined supply chain management guarantees on-time deliveries, reducing operational risks for our partners.</td>
+            </tr>
+            <tr>
+                <td>Commitment to Integrity</td>
+                <td>Our operations are built upon the values of trust, transparency, and excellence in every transaction.</td>
+            </tr>
+        </table>
+    </section>
+
+    <!-- Leadership Section -->
+    <section id="leadership" class="section">
+        <h2>Leadership</h2>
+        <div class="leadership-content">
+            <div class="leader-image">
+                <img src="https://uploads.onecompiler.io/43xeqf88r/43xf9jquk/1758128009061.jpg" alt="Sriram Padmanabhan Kannan">
+            </div>
+            <div class="leader-info">
+                <h3>Sriram Padmanabhan Kannan</h3>
+                <p><strong>Chief Executive Officer & Director of Fourlions Trading Limited</strong></p>
+                <p>Under the leadership of Sriram Padmanabhan Kannan, Chief Executive Officer & Director of Fourlions Trading Limited, the company is guided by strong governance and a forward-looking approach. With a steadfast commitment to trust, integrity, and excellence, the leadership team drives the vision of connecting markets and fostering sustainable growth opportunities for global partners.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Values Section -->
+    <section id="values" class="section">
+        <h2>Our Values</h2>
+        <div class="values-grid">
+            <div class="value-item">
+                <i class="fas fa-handshake"></i>
+                <h3>Integrity</h3>
+                <p>Conducting every transaction with honesty and transparency.</p>
+            </div>
+            <div class="value-item">
+                <i class="fas fa-award"></i>
+                <h3>Excellence</h3>
+                <p>Consistently delivering superior quality and service.</p>
+            </div>
+            <div class="value-item">
+                <i class="fas fa-leaf"></i>
+                <h3>Sustainability</h3>
+                <p>Promoting responsible sourcing and environmentally conscious practices.</p>
+            </div>
+            <div class="value-item">
+                <i class="fas fa-users"></i>
+                <h3>Customer Focus</h3>
+                <p>Prioritising the needs of wholesalers and distributors at every stage.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="section">
+        <h2>Contact Information</h2>
+        <div class="contact-container">
+            <div class="contact-info">
+                <p><i class="fas fa-building"></i> <strong>Company:</strong> Fourlions Trading Limited</p>
+                <p><i class="fas fa-envelope"></i> <strong>Email:</strong> info@fourlionstrading.com</p>
+                <p><i class="fas fa-phone-alt"></i> <strong>Telephone:</strong> +44 7341698712</p>
+                <p><i class="fas fa-map-marker-alt"></i> <strong>Head Office:</strong> London, United Kingdom</p>
+            </div>
+            <div class="contact-form-container">
+                <h3>Get In-Touch</h3>
+                <form id="contactForm">
+                    <div class="form-group">
+                        <label for="name">Name:</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email:</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="subject">Subject:</label>
+                        <input type="text" id="subject" name="subject" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Message:</label>
+                        <textarea id="message" name="message" rows="5" required></textarea>
+                    </div>
+                    <button type="submit" class="btn" id="submitBtn">
+                        <span id="btnText">Send Message</span>
+                    </button>
+                </form>
+                <div id="messageDiv" class="message"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <img src="https://uploads.onecompiler.io/43xeqf88r/43xf9jquk/WhatsApp%20Image%202025-10-22%20at%2010.24.02_4b01cbca.jpg" style="border-radius: 50%; width: 50px; height: 50px; border: 2px solid #FFC105;"><p>&copy; 2025 Fourlions Trading Limited. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // Initialize EmailJS (replace with your actual public key)
+        emailjs.init("yvFr8CAhAUeuy3-at");
+        
+        // Mobile Navigation
+        const burger = document.querySelector('.burger');
+        const nav = document.querySelector('.nav-links');
+        const navLinks = document.querySelectorAll('.nav-links li');
+        burger.addEventListener('click', () => {
+            nav.classList.toggle('nav-active');
+            burger.classList.toggle('active');
+            
+            navLinks.forEach((link, index) => {
+                if (link.style.animation) {
+                    link.style.animation = '';
+                } else {
+                    link.style.animation = `navLinkFade 0.5s ease forwards ${index / 7 + 0.3}s`;
+                }
+            });
+        });
+        
+        // Close mobile menu when clicking on a link
+        navLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                nav.classList.remove('nav-active');
+                burger.classList.remove('active'); // <-- FIXED: Was 'toggle' now 'active'
+                navLinks.forEach(item => item.style.animation = '');
+            });
+        });
+        
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 105, /* MODIFIED */
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+        
+        // Form submission with EmailJS
+        document.getElementById('contactForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            
+            const submitBtn = document.getElementById('submitBtn');
+            const btnText = document.getElementById('btnText');
+            const messageDiv = document.getElementById('messageDiv');
+            
+            // Show loading state
+            submitBtn.disabled = true;
+            btnText.innerHTML = '<span class="loading"></span>Sending...';
+            
+            // Get form values
+            const formData = {
+                name: document.getElementById('name').value,
+                email: document.getElementById('email').value,
+                subject: document.getElementById('subject').value,
+                message: document.getElementById('message').value,
+                timestamp: new Date().toLocaleString()
+            };
+            
+            // Send email using EmailJS
+            emailjs.send("service_ip3e79f","template_6bgpthi", formData)
+                .then(function(response) {
+                    console.log('SUCCESS!', response.status, response.text);
+                    
+                    // Show success message
+                    messageDiv.textContent = 'Thank you! Your message has been sent successfully.';
+                    messageDiv.className = 'message success';
+                    messageDiv.style.display = 'block';
+                    
+                    // Reset form
+                    document.getElementById('contactForm').reset();
+                })
+                .catch(function(error) {
+                    console.log('FAILED...', error);
+                    
+                    // Show error message
+                    messageDiv.textContent = 'Sorry, there was an error sending your message. Please try again.';
+                    messageDiv.className = 'message error';
+                    messageDiv.style.display = 'block';
+                })
+                .finally(function() {
+                    // Reset button state
+                    submitBtn.disabled = false;
+                    btnText.textContent = 'Send Message';
+                    
+                    // Hide message after 5 seconds
+                    setTimeout(() => {
+                        messageDiv.style.display = 'none';
+                    }, 5000);
+                });
+        });
+        
+        // Add scroll animations
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.1
+        };
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = 1;
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+        
+        // Observe sections for animation
+        document.querySelectorAll('.section').forEach(section => {
+            section.style.opacity = 0;
+            section.style.transform = 'translateY(20px)';
+            section.style.transition = 'opacity 0.8s, transform 0.8s';
+            observer.observe(section);
+        });
+        
+
+    </script>
+</body>
+</html>
